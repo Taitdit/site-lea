@@ -1,0 +1,113 @@
+@use "./styles/variables" as *;
+@use "./styles/mixin" as *;
+
+
+// RESET
+
+* {
+    box-sizing: border-box;
+    color: $color-text;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    @include font;
+    line-height: 1.1;
+    font-size: 0.9rem;
+    font-weight: 400;
+    @include mobile {
+      font-size: 1rem;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+
+    font-family: $font;
+    color: $color-text;
+    background-color: $color-background;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+// TYPOGRAPHIE
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+p {
+    line-height: 1.6;
+}
+
+
+// LIENS
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+
+// IMAGES
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
+// BOUTONS
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+// LISTES
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cta {
+    @include cta(primary);
+}
+
+.cta-secondary {
+    @include cta(secondary);
+}

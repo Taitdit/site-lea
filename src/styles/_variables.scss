@@ -1,0 +1,42 @@
+// COULEURS
+
+$primary: #139c91;
+$secondary: #ffae18;
+
+$error: #ee0f0f;
+$success: #0c9918;
+
+$color-background: #ffffff;
+$color-text: #222222;
+$color-text-light: #ffffff;
+
+$black-alpha: rgba(0,0,0,0.3);
+
+// TYPOGRAPHIES
+$font-title: "Jersey 10", sans-serif;
+$font: "Montserrat", sans-serif;
+
+// TAILLES
+
+$max-width: 1200px;
+$spacing-small: 1rem;
+$spacing-medium: 2rem;
+$spacing-large: 4rem;
+
+
+// BREAKPOINTS
+$bigDesktop: 1240px;
+$desktop: 1080px;
+$smallDesktop: 840px;
+$tablette: 640px;
+$smallTablette: 600px;
+$bigMobile: 500px;
+$mobile: 420px;
+$smallMobile: 380px;
+
+
+// AUTRES
+
+$border-radius: 8px;
+$shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+$transition: 0.3s ease;
