@@ -1,60 +1,193 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link as ScrollLink } from "react-scroll";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./Navigation.scss";
 
 const Navigation = () => {
-    const [showCross, setShowCross] = useState(false);
-    const { openMenu, setOpenMenu } = useState(false);
-    
+    const [openMenu, setOpenMenu] = useState(false);
+    const [activeSection, setActiveSection] = useState("hero");
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const isHome = location.pathname === "/";
 
     useEffect(() => {
+        // On surveille les sections uniquement sur l'accueil
+        if (!isHome) return;
+
+        const sectionIds = [
+            "hero",
+            "realisations",
+            "a-propos",
+            "contact",
+        ];
+
+        const handleScroll = () => {
+            const headerOffset = 100;
+
+            let currentSection = "hero";
+
+            sectionIds.forEach((id) => {
+                const section = document.getElementById(id);
+
+                if (!section) return;
+
+                const rect = section.getBoundingClientRect();
+
+                if (rect.top <= headerOffset) {
+                    currentSection = id;
+                }
+            });
+
+            setActiveSection(currentSection);
+        };
+
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll, {
+            passive: true,
+        });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [isHome]);
+
+    const handleNavigation = (sectionId) => {
         setOpenMenu(false);
-    }, [setOpenMenu]);
 
-    useEffect(() => {
-        let timer;
-
-        if (openMenu) {
-        timer = setTimeout(() => {
-            setShowCross(true);
-        }, 300); // délai de 300ms
-        } else {
-        setShowCross(false);
-        }
-
-        return () => clearTimeout(timer);
-    }, [openMenu]);
+        navigate("/", {
+            state: {
+                scrollTo: sectionId,
+            },
+        });
+    };
 
     return (
         <div className="nav__container">
-            <button 
-            type="button"
-            aria-label={openMenu ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={openMenu}
-            aria-controls="main-navigation">
-                {!showCross ? 
-                    // <Burger /> 
-                    'burger'
-                    : 
-                    // <Croix />
-                    'croix'
-                }
+            <button
+                type="button"
+                className="burger"
+                aria-label={openMenu ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={openMenu}
+                onClick={() => setOpenMenu(!openMenu)}
+                aria-controls="main-navigation"
+            >
+                <span className={openMenu ? "open" : ""}></span>
+                <span className={openMenu ? "hide" : ""}></span>
+                <span className={openMenu ? "open" : ""}></span>
             </button>
-            <nav id="main-navigation" aria-label="Navigation principale" className={`${openMenu ? "open" : ""} nav__item`}>
-                <ScrollLink to="accueil" smooth>
-                    Accueil
-                </ScrollLink>
 
-                <ScrollLink to="realisations" smooth>
-                    Mes réalisations
-                </ScrollLink>
+            <nav
+                id="main-navigation"
+                aria-label="Navigation principale"
+                className={`${openMenu ? "open" : ""} nav__item`}
+            >
+                {/* ACCUEIL */}
+                {isHome ? (
+                    <ScrollLink
+                        to="hero"
+                        smooth
+                        offset={-100}
+                        className={
+                            activeSection === "hero"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <span>Accueil</span>
+                    </ScrollLink>
+                ) : (
+                    <Link
+                        to="/"
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <span>Accueil</span>
+                    </Link>
+                )}
 
-                <ScrollLink to="a-propos" smooth>
-                    À propos
-                </ScrollLink>
+                {/* RÉALISATIONS */}
+                {isHome ? (
+                    <ScrollLink
+                        to="realisations"
+                        smooth
+                        offset={-100}
+                        className={
+                            activeSection === "realisations"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <span>Mes réalisations</span>
+                    </ScrollLink>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() =>
+                            handleNavigation("realisations")
+                        }
+                    >
+                        <span>Mes réalisations</span>
+                    </button>
+                )}
 
-                <ScrollLink to="contact" smooth>
-                    Contact
-                </ScrollLink>
+                {/* À PROPOS */}
+                {isHome ? (
+                    <ScrollLink
+                        to="a-propos"
+                        smooth
+                        offset={-100}
+                        className={
+                            activeSection === "a-propos"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <span>À propos</span>
+                    </ScrollLink>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() =>
+                            handleNavigation("a-propos")
+                        }
+                    >
+                        <span>À propos</span>
+                    </button>
+                )}
+
+                {/* CONTACT */}
+                {isHome ? (
+                    <ScrollLink
+                        to="contact"
+                        smooth
+                        offset={-100}
+                        className={
+                            activeSection === "contact"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <span>Contact</span>
+                    </ScrollLink>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() =>
+                            handleNavigation("contact")
+                        }
+                    >
+                        <span>Contact</span>
+                    </button>
+                )}
             </nav>
         </div>
-    )
-}
+    );
+};
+
+export default Navigation;

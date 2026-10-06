@@ -1,7 +1,13 @@
 // COULEURS
+@use "./fonts" as *;
 
-$primary: #139c91;
-$secondary: #ffae18;
+
+$font: "Libre Baskerville", Georgia, serif;
+$font-title: Arial, sans-serif;
+
+
+$primary: #775D33;
+$secondary: #b4b4b4;
 
 $error: #ee0f0f;
 $success: #0c9918;
@@ -12,16 +18,14 @@ $color-text-light: #ffffff;
 
 $black-alpha: rgba(0,0,0,0.3);
 
-// TYPOGRAPHIES
-$font-title: "Jersey 10", sans-serif;
-$font: "Montserrat", sans-serif;
 
 // TAILLES
 
 $max-width: 1200px;
+$spacing-Xsmall: 0.5rem;
 $spacing-small: 1rem;
-$spacing-medium: 2rem;
-$spacing-large: 4rem;
+$spacing-medium: 1.5rem;
+$spacing-large: 3rem;
 
 
 // BREAKPOINTS

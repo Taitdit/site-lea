@@ -1,0 +1,105 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  gap: 0;
+  @include tablette {
+    display: none;
+  }
+  span {
+    display: block;
+    width: 35px;
+    height: 13px;
+    margin: 4px 0;
+    background-color: $primary;
+    border-radius: 500px;
+    transition: 0.5s ease;
+    &.hide {
+      opacity: 0;
+    }
+    &.open {
+      height: 12px;
+    }
+    &:first-child.open {
+      transform:scale(1.2) rotate(45deg) translateX(9px) translateY(6px);
+    }
+    &:last-child.open {
+      transform:scale(1.2) rotate(-45deg) translateX(10px) translateY(-6px);
+    }
+  }
+}
+.nav {
+  &__container {
+    display: flex;
+    justify-content: center;
+    width: 35px;
+    height: 41px;
+    margin-bottom: 1rem;
+    @include tablette {
+      width: auto;
+      height: auto;
+      display: inline;
+      margin-bottom: 0;
+    }
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: $color-background;
+    box-shadow: $shadow;
+    width: 100%;
+    z-index: -1;
+    transition: 0.5s ease;
+    transform: translateY(-100%);
+    transform-origin: top;
+    gap: 0;
+    &.open {
+      transform: translateY(0);
+    }
+    @include bigMobile {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2px;
+    }
+    @include smallTablette {
+      justify-content: flex-end;
+    }
+    @include tablette {
+      position: initial;
+      box-shadow: none;
+      background: none;
+      width: auto;
+      transition: none;
+      transform: translateY(0);
+    }
+    a, button {
+      cursor: pointer;
+      padding: 1rem;
+      text-decoration: none;
+      display: flex;
+      background: none;
+      align-items: center;
+      span {
+        font-weight: bold;
+        text-align: center;
+      }
+      &:hover {
+        background-color: $secondary;
+      }
+      &.active {
+        background-color: $primary;
+        cursor: initial;
+        span {
+          color: $color-background;
+        }
+      }
+    }
+  }
+}

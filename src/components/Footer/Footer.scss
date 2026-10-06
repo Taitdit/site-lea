@@ -1,0 +1,197 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.footer {
+    position: relative;
+    color: $color-text-light;
+    background:
+        url("./img/bg-footer.webp")
+        center / cover no-repeat;
+    overflow: hidden;
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.65);
+        z-index: 0;
+    }
+
+    &__container {
+        position: relative;
+        z-index: 1;
+
+        width: calc(100% - (#{$spacing-medium} * 2));
+        max-width: $max-width;
+        margin: 0 auto;
+        padding: $spacing-large 0 $spacing-medium;
+    }
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-large;
+
+        padding-bottom: $spacing-large;
+    }
+
+    // LOGO
+
+    &__logo {
+        display: inline-block;
+        width: 180px;
+        color: $color-text-light;
+        cursor: pointer;
+
+
+        svg {
+            fill: $color-background;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-text-light;
+            outline-offset: $spacing-Xsmall;
+        }
+    }
+
+    // NAVIGATION
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-small;
+
+        a, button {
+            position: relative;
+
+            @include font;
+
+            color: $color-text-light;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -4px;
+
+                width: 0;
+                height: 1px;
+
+                background-color: $color-text-light;
+                transition: width $transition;
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $color-text-light;
+                outline-offset: $spacing-Xsmall;
+            }
+        }
+    }
+
+    // PARTIE BASSE
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-small;
+
+        padding-top: $spacing-medium;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+
+        @include font;
+        font-size: 0.8rem;
+
+        p {
+            margin: 0;
+            opacity: 0.75;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        a {
+            position: relative;
+
+            color: $color-text-light;
+            text-decoration: none;
+            opacity: 0.75;
+
+            transition: opacity $transition;
+            &.active,
+            &:hover {
+                opacity: 1;
+                text-decoration: underline;
+            }
+
+            &.active {
+                cursor: initial;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $color-text-light;
+                outline-offset: $spacing-Xsmall;
+            }
+        }
+    }
+
+
+    // ==========================
+    // TABLETTE
+    // ==========================
+
+    @include tablette {
+
+        &__logo {
+            width: 270px;
+        }
+
+        &__top {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__nav {
+            flex-direction: row;
+            align-items: center;
+            gap: $spacing-medium;
+        }
+
+        &__bottom {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+
+    // ==========================
+    // DESKTOP
+    // ==========================
+
+    @include desktop {
+
+        &__container {
+            padding-top: calc($spacing-large * 1.5);
+        }
+
+        &__logo {
+            width: 290px;
+        }
+
+        &__nav {
+            gap: $spacing-large;
+        }
+    }
+}

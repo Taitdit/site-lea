@@ -1,21 +1,31 @@
-@use "../styles/variables" as *;
-@use "../styles/mixin" as *;
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
 .header {
     position: sticky;
     top: 0;
     z-index: 999;
+    background-color: $color-background;
+    box-shadow: $shadow;
     &__container {
         display: flex;
         justify-content: space-between;
-        padding:0 1rem;
-        background-color: $bg;
-        background: $primary;
+        margin: 0 auto;
         align-items: flex-end;
-        @include mobile {
-            padding: 0 2rem;
+        background-color: $color-background;
+        padding: 1rem 1rem 0 1rem;
+        max-width: $max-width;
+        svg {
+            fill: $color-text;
+            max-width: 200px;
+            width: 100%;
+            height: auto;
         }
+
     }
-    &.shadow {
-        box-shadow: -1px 1px 11px 0px rgb(0 0 0);  
+    &__logo {
+        margin-bottom: 1rem;
+        &.active {
+            cursor: pointer;
+        }
     }
 }

@@ -6,7 +6,8 @@ main {
 }
 
 .section {
-    padding: $spacing-large $spacing-medium;
+    padding: $spacing-medium $spacing-small;
+
 
     &__container {
         width: 100%;
@@ -16,13 +17,8 @@ main {
 
     &__title {
         margin-bottom: $spacing-medium;
-        text-align: center;
     }
-}
-
-
-@include mobile {
-    .section {
-        padding: $spacing-medium $spacing-small;
+    @include smallTablette {
+       padding: $spacing-medium;
     }
 }

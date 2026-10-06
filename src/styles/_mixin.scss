@@ -46,6 +46,7 @@
     @if $variant == primary {
         background-color: $primary;
         border-color: $primary;
+        color: $color-background;
         span {
             color: $color-text-light;
         }

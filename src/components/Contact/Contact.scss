@@ -1,0 +1,137 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.contact {
+    padding: $spacing-large $spacing-medium;
+    background-color: $color-background;
+    color: $color-text;
+
+    &__container {
+        width: 100%;
+        max-width: $max-width;
+        margin: 0 auto;
+    }
+
+    h2 {
+        margin: 0 0 $spacing-large;
+        font-size: 3rem;
+    }
+
+    &__content {
+        max-width: 900px;
+    }
+
+    &__intro {
+        @include font;
+
+        margin: 0 0 $spacing-medium;
+        font-size: 1.6rem;
+        line-height: 1.4;
+    }
+
+    &__text {
+        @include font;
+
+        max-width: 650px;
+        margin: 0 0 $spacing-large;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    &__name {
+        @include font;
+
+        margin: 0 0 $spacing-large;
+        font-weight: 700;
+    }
+
+    &__links {
+        display: flex;
+        gap: 0;
+        flex-direction: column;
+        border-top: 1px solid $secondary;
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-Xsmall;
+
+        padding: $spacing-medium 0;
+
+        color: $color-text;
+        text-decoration: none;
+
+        border-bottom: 1px solid $secondary;
+
+        transition: padding-left $transition;
+
+        &:hover {
+            padding-left: $spacing-small;
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $primary;
+            outline-offset: 5px;
+        }
+    }
+
+    &__label {
+        @include font;
+
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        opacity: 0.6;
+    }
+
+    &__value {
+        @include font;
+
+        font-size: clamp(1.4rem, 6vw, 2.5rem);
+        line-height: 1.2;
+
+        transition: color $transition;
+    }
+
+    &__link:hover &__value {
+        color: $primary;
+    }
+
+    @include tablette {
+        padding: 5rem $spacing-large;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        &__intro {
+            font-size: 2rem;
+        }
+
+        &__link {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: $spacing-large;
+
+            padding: 2rem 0;
+        }
+
+        &__value {
+            font-size: clamp(1.8rem, 4vw, 2rem);
+            text-align: right;
+        }
+    }
+
+    @include desktop {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+
+        h2 {
+            font-size: 3rem;
+        }
+    }
+}
