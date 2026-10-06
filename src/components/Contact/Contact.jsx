@@ -23,6 +23,7 @@ const Contact = () => {
                         <a
                             href="mailto:lea.l@me.com"
                             className="contact__link"
+                            aria-label="Envoyer un e-mail à Léa Lemoine"
                         >
                             <span className="contact__label">Par e-mail</span>
                             <span className="contact__value">
@@ -33,6 +34,7 @@ const Contact = () => {
                         <a
                             href="tel:+33642940094"
                             className="contact__link"
+                            aria-label="Appeler Léa Lemoine au 06 42 94 00 94"
                         >
                             <span className="contact__label">Par téléphone</span>
                             <span className="contact__value">

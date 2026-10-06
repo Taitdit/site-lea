@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import "./Mentions.scss";
 
 const Mentions = () => {
@@ -11,7 +12,27 @@ const Mentions = () => {
     }, []);
 
     return (
-        <main className="mentions-legales">
+        <>
+        <Helmet>
+            <title>Mentions légales | Strates Atelier</title>
+
+            <meta
+                name="description"
+                content="Mentions légales du site Strates Atelier."
+            />
+
+            <meta
+                name="robots"
+                content="noindex, follow"
+            />
+
+            <link
+                rel="canonical"
+                href="https://strates-atelier.com/mentions-legales"
+            />
+        </Helmet>
+
+        <div className="mentions-legales">
             <div className="mentions-legales__container">
                 <header className="mentions-legales__header">
                     <h1>Mentions légales</h1>
@@ -167,7 +188,8 @@ const Mentions = () => {
                     Dernière mise à jour : octobre 2026
                 </p>
             </div>
-        </main>
+        </div>
+        </>
     );
 };
 

@@ -19,8 +19,7 @@ const Header = () => {
             const headerOffset = 100;
             const rect = hero.getBoundingClientRect();
 
-            // Le Hero est actif tant que la section suivante
-            // n'a pas atteint la zone du header
+
             const isActive = rect.bottom > headerOffset;
 
             setIsHeroActive(isActive);
@@ -45,7 +44,7 @@ const Header = () => {
                 <Link
                     to="/"
                     className="header__logo active"
-                    aria-label="Retour à l'accueil"
+                    aria-label="Retour à la page d'accueil"
                 >
                     <Logo />
                 </Link>
@@ -59,7 +58,7 @@ const Header = () => {
                         smooth
                         offset={-100}
                         className="header__logo active"
-                        aria-label="Retour à l'accueil"
+                        aria-label="Retour en haut de la page d'accueil"
                     >
                         <Logo />
                     </ScrollLink>

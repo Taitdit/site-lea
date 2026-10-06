@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navigation.scss";
 
 const Navigation = () => {
@@ -8,9 +8,27 @@ const Navigation = () => {
     const [activeSection, setActiveSection] = useState("hero");
 
     const location = useLocation();
-    const navigate = useNavigate();
 
     const isHome = location.pathname === "/";
+
+    useEffect(() => {
+        if (!openMenu) return;
+
+        const handleKeyDown = (event) => {
+            if (event.key === "Escape") {
+                setOpenMenu(false);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener(
+                "keydown",
+                handleKeyDown
+            );
+        };
+    }, [openMenu]);
 
     useEffect(() => {
         // On surveille les sections uniquement sur l'accueil
@@ -54,22 +72,13 @@ const Navigation = () => {
         };
     }, [isHome]);
 
-    const handleNavigation = (sectionId) => {
-        setOpenMenu(false);
-
-        navigate("/", {
-            state: {
-                scrollTo: sectionId,
-            },
-        });
-    };
 
     return (
         <div className="nav__container">
             <button
                 type="button"
                 className="burger"
-                aria-label={openMenu ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-label={openMenu ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
                 aria-expanded={openMenu}
                 onClick={() => setOpenMenu(!openMenu)}
                 aria-controls="main-navigation"
@@ -95,6 +104,11 @@ const Navigation = () => {
                                 ? "active"
                                 : ""
                         }
+                        aria-current={
+                            activeSection === "hero"
+                                ? "location"
+                                : undefined
+                        }
                         onClick={() => setOpenMenu(false)}
                     >
                         <span>Accueil</span>
@@ -119,19 +133,23 @@ const Navigation = () => {
                                 ? "active"
                                 : ""
                         }
+                        aria-current={
+                            activeSection === "realisations"
+                                ? "location"
+                                : undefined
+                        }
                         onClick={() => setOpenMenu(false)}
                     >
                         <span>Mes réalisations</span>
                     </ScrollLink>
                 ) : (
-                    <button
-                        type="button"
-                        onClick={() =>
-                            handleNavigation("realisations")
-                        }
+                    <Link
+                        to="/"
+                        state={{ scrollTo: "realisations" }}
+                        onClick={() => setOpenMenu(false)}
                     >
                         <span>Mes réalisations</span>
-                    </button>
+                    </Link>
                 )}
 
                 {/* À PROPOS */}
@@ -139,25 +157,29 @@ const Navigation = () => {
                     <ScrollLink
                         to="a-propos"
                         smooth
-                        offset={-100}
+                        offset={-50}
                         className={
                             activeSection === "a-propos"
                                 ? "active"
                                 : ""
+                        }
+                        aria-current={
+                            activeSection === "a-propos"
+                                ? "location"
+                                : undefined
                         }
                         onClick={() => setOpenMenu(false)}
                     >
                         <span>À propos</span>
                     </ScrollLink>
                 ) : (
-                    <button
-                        type="button"
-                        onClick={() =>
-                            handleNavigation("a-propos")
-                        }
+                    <Link
+                        to="/"
+                        state={{ scrollTo: "a-propos" }}
+                        onClick={() => setOpenMenu(false)}
                     >
                         <span>À propos</span>
-                    </button>
+                    </Link>
                 )}
 
                 {/* CONTACT */}
@@ -171,19 +193,23 @@ const Navigation = () => {
                                 ? "active"
                                 : ""
                         }
+                        aria-current={
+                            activeSection === "contact"
+                                ? "location"
+                                : undefined
+                        }
                         onClick={() => setOpenMenu(false)}
                     >
                         <span>Contact</span>
                     </ScrollLink>
                 ) : (
-                    <button
-                        type="button"
-                        onClick={() =>
-                            handleNavigation("contact")
-                        }
+                    <Link
+                        to="/"
+                        state={{ scrollTo: "contact" }}
+                        onClick={() => setOpenMenu(false)}
                     >
                         <span>Contact</span>
-                    </button>
+                    </Link>
                 )}
             </nav>
         </div>

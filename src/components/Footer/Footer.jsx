@@ -1,5 +1,5 @@
 import { Link as ScrollLink } from "react-scroll";
-import { Link, useLocation, useNavigate  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../svg/Logo";
 
 import "./Footer.scss";
@@ -7,17 +7,8 @@ import "./Footer.scss";
 const Footer = () => {
     const currentYear = new Date().getFullYear();
     const location = useLocation();
-    const navigate = useNavigate();
 
     const isHome = location.pathname === "/";
-
-    const handleNavigation = (sectionId) => {
-        navigate("/", {
-            state: {
-                scrollTo: sectionId,
-            },
-        });
-    };
 
     const renderNavLink = (sectionId, label) => {
         if (isHome) {
@@ -25,7 +16,7 @@ const Footer = () => {
                 <ScrollLink
                     to={sectionId}
                     smooth
-                    offset={-100}
+                    offset={-50}
                 >
                     {label}
                 </ScrollLink>
@@ -33,12 +24,18 @@ const Footer = () => {
         }
 
         return (
-            <button
-                type="button"
-                onClick={() => handleNavigation(sectionId)}
+            <Link
+                to="/"
+                state={{ scrollTo: sectionId }}
+                
+                aria-current={
+                    location.pathname === "/mentions-legales"
+                        ? "page"
+                        : undefined
+                }
             >
                 {label}
-            </button>
+            </Link>
         );
     };
 
@@ -90,6 +87,11 @@ const Footer = () => {
                             location.pathname === "/mentions-legales"
                                 ? "active"
                                 : ""
+                        }
+                        aria-current={
+                            location.pathname === "/mentions-legales"
+                                ? "page"
+                                : undefined
                         }
                     >
                         Mentions légales

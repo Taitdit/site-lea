@@ -10,13 +10,26 @@ const About = () => {
                 </h2>
                 <div className="about">
                     <div className="about__img">
-                        <img className="tohide" src="/img/precision-metallurgique-en-atelier.webp" alt="Précision métallurgique en atelier" />
-                        <img className="toshow" src="/img/precision-metallurgique-en-atelier_M.webp" alt="Précision métallurgique en atelier" />
+                        <img
+                            className="tohide"
+                            src="/img/precision-metallurgique-en-atelier.webp"
+                            alt="Travail de précision du métal dans l'atelier Strates"
+                            loading="lazy"
+                            decoding="async"
+                        />
+
+                        <img
+                            className="toshow"
+                            src="/img/precision-metallurgique-en-atelier_M.webp"
+                            alt="Travail de précision du métal dans l'atelier Strates"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
                     <div className="about__container">
                         <p><em>&laquo; Une strate se forme lentement. Couche après couche, jusqu'à faire matière. &raquo;</em></p>
                         <h3>D'abord le métal.</h3>
-                        <p>Une entrée dans l'atelier d'Erwan Boulloud sans savoir tenir une disqueuse, avec pour seul bagage l'envie d'apprendre. Le laiton, l'inox, l'acier, le geste précis, la finition : tout s'apprend là, à la main. Huit année, dont deux à la tête de l'atelier.</p>
+                        <p>Une entrée dans l'atelier d'Erwan Boulloud sans savoir tenir une disqueuse, avec pour seul bagage l'envie d'apprendre. Le laiton, l'inox, l'acier, le geste précis, la finition : tout s'apprend là, à la main. Huit années, dont deux à la tête de l'atelier.</p>
                         <div className="tohide">
                         <h3>La seconde est minérale. La pierre, la chaux, la terre, transmises par un Compagnon tailleur de pierre.</h3>
 

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import "./NotFound.scss";
 
@@ -12,7 +13,16 @@ const NotFound = () => {
     }, []);
 
     return (
-        <main className="not-found">
+        <>
+        <Helmet>
+            <title>Page introuvable | Strates Atelier</title>
+
+            <meta
+                name="robots"
+                content="noindex, follow"
+            />
+        </Helmet>
+        <div className="not-found">
             <div className="not-found__container">
                 <p className="not-found__code" aria-hidden="true">
                     404
@@ -30,7 +40,8 @@ const NotFound = () => {
                     Retour à l’accueil
                 </Link>
             </div>
-        </main>
+        </div>
+        </>
     );
 };
 

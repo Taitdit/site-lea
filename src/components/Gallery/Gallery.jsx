@@ -11,6 +11,7 @@ const Gallery = () => {
     const closeButtonRef = useRef(null);
     const lastFocusedElement = useRef(null);
     const galleryRef = useRef(null);
+    const lightboxRef = useRef(null);
 
     const visibleImages = showAll
         ? galleryImages
@@ -80,14 +81,48 @@ const Gallery = () => {
         const handleKeyDown = (event) => {
             if (event.key === "Escape") {
                 closeLightbox();
+                return;
             }
 
             if (event.key === "ArrowLeft") {
                 showPrevious();
+                return;
             }
 
             if (event.key === "ArrowRight") {
                 showNext();
+                return;
+            }
+
+            if (event.key === "Tab") {
+                const focusableElements =
+                    lightboxRef.current?.querySelectorAll(
+                        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                    );
+
+                if (!focusableElements?.length) return;
+
+                const firstElement = focusableElements[0];
+                const lastElement =
+                    focusableElements[focusableElements.length - 1];
+
+                // Shift + Tab sur le premier élément
+                if (
+                    event.shiftKey &&
+                    document.activeElement === firstElement
+                ) {
+                    event.preventDefault();
+                    lastElement.focus();
+                }
+
+                // Tab sur le dernier élément
+                if (
+                    !event.shiftKey &&
+                    document.activeElement === lastElement
+                ) {
+                    event.preventDefault();
+                    firstElement.focus();
+                }
             }
         };
 
@@ -114,7 +149,7 @@ const Gallery = () => {
                 </h2>
 
                 {/* GALERIE */}
-                <div className="gallery__grid">
+                <div className="gallery__grid"  id="gallery-list">
                     {visibleImages.map((image, index) => (
                         <button
                             className={`
@@ -129,7 +164,7 @@ const Gallery = () => {
                             <img
                                 src={image.src}
                                 alt={image.alt}
-                                loading="lazy"
+                                decoding="async"
                                 width="700"
                                 height={
                                     image.format === "vertical"
@@ -155,6 +190,7 @@ const Gallery = () => {
                     type="button"
                     onClick={toggleGallery}
                     aria-expanded={showAll}
+                    aria-controls="gallery-list"
                 >
                     <span>
                         {showAll
@@ -166,11 +202,12 @@ const Gallery = () => {
 
             {activeIndex !== null && (
                 <div
-                    className="lightbox"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label="Galerie des réalisations"
-                    onClick={handleBackdropClick}
+                        ref={lightboxRef}
+                        className="lightbox"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Galerie des réalisations"
+                        onClick={handleBackdropClick}
                 >
                     <button
                         ref={closeButtonRef}

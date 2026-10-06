@@ -5,21 +5,37 @@ const Hero = () => {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
+        let ticking = false;
+
         const handleScroll = () => {
-            setScrollY(window.scrollY);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    setScrollY(window.scrollY);
+                    ticking = false;
+                });
+
+                ticking = true;
+            }
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener("scroll", handleScroll, {
+            passive: true,
+        });
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
     return (
         <section id="hero">
             <div className="hero">
-                <img src="/img/hero.webp" alt="" />
+                <img
+                    src="/img/hero.webp"
+                    alt=""
+                    fetchPriority="high"
+                    decoding="async"
+                />
 
                 <h1
                     className="hero__title"

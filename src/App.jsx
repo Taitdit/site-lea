@@ -2,8 +2,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Outlet,
-  useLocation
+  Outlet
 } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -16,21 +15,28 @@ import "./App.scss";
 
 
 const MainLayout = () => {
-  const location = useLocation();
+    return (
+        <>
+            <a
+                href="#main-content"
+                className="skip-link"
+            >
+                Aller au contenu principal
+            </a>
 
-  return (
-    <>
-        <Header />
+            <Header />
 
-        <main>
+            <main
+                id="main-content"
+                tabIndex="-1"
+            >
                 <Outlet />
-        </main>
+            </main>
 
-         <Footer />
-    </>
-  ); 
-}
-
+            <Footer />
+        </>
+    );
+};
 
 
 const App = () => {
