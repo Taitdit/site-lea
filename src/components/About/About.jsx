@@ -6,7 +6,7 @@ const About = () => {
             <div className="section__container">
 
                 <h2 className="section__title">
-                    À propos de Strate
+                    À propos de Strates
                 </h2>
                 <div className="about">
                     <div className="about__img">

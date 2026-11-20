@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Mentions from "./pages/Mentions";
 import NotFound from "./pages/NotFound";
+import Maintenance from "./pages/Maintenance";
 
 import "./App.scss";
 
@@ -38,8 +39,13 @@ const MainLayout = () => {
     );
 };
 
+const isMaintenance = true;
+
 
 const App = () => {
+    if (isMaintenance) {
+        return <Maintenance />;
+    }
 
   return (
         <BrowserRouter>

@@ -5,6 +5,14 @@ const Hero = () => {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if (prefersReducedMotion) {
+            return;
+        }
+
         let ticking = false;
 
         const handleScroll = () => {
